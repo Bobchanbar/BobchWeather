@@ -52,7 +52,7 @@ class NetworkService: WeatherAPI {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.openweathermap.org"
-        urlComponents.path = "data/2.5/weather"
+        urlComponents.path = "/data/2.5/weather"
         
         urlComponents.queryItems = queryItems
         
@@ -88,7 +88,7 @@ class NetworkService: WeatherAPI {
             } catch {
                 complition(.failure(.DecodeError))
             }
-        }
+        }.resume()
             
     }
     
