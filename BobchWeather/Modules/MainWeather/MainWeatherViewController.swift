@@ -14,8 +14,12 @@ enum LastRequestType {
 
 class MainWeatherViewController: UIViewController {
     
+    //MARK: - Properties
+    
     var locationService: LocationServiceProtocol?
     var lastRequestType: LastRequestType?
+    
+    //MARK: - UIElements
     
     let tempLabel: UILabel = {
         let label = UILabel()
@@ -31,7 +35,7 @@ class MainWeatherViewController: UIViewController {
         return button
     }()
     
-    
+    //MARK: - Actions
     @objc func openSearchController(){
         
     }
@@ -51,17 +55,26 @@ class MainWeatherViewController: UIViewController {
         }
     }
 
+    //MARK: - LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
+        buildConstraints()
+        locationService = LocationService()
+        locationService?.delegate = self
+    
+        getWeatherByID(524901)
+    }
+    
+    //MARK: - Helpers
+    
+    func setupUI() {
         view.backgroundColor = .white
         view.addSubview(tempLabel)
         view.addSubview(locationButton)
-        
-        locationService = LocationService()
-        locationService?.delegate = self
-        
         locationButton.addTarget(self, action: #selector(getLocation), for: .touchUpInside)
+        
         
         let barSearchButton  = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"),style: .plain, target: self, action: #selector(updateWeather))
         
@@ -71,6 +84,9 @@ class MainWeatherViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = barUpdateButton
         
+    }
+    
+    func buildConstraints() {
         NSLayoutConstraint.activate([
             tempLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tempLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -78,10 +94,12 @@ class MainWeatherViewController: UIViewController {
             locationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             locationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16)
         ])
-        
+    }
+    
+    func getWeatherByID(_ ID: Int) {
         lastRequestType = .id
         
-        NetworkService.shared.getWeatherByCityId(524901) { (result) in
+        NetworkService.shared.getWeatherByCityId(ID) { (result) in
             switch result {
             case .success(let weatherResult):
                 let temp = Int(weatherResult.main.temp - 273.15)
@@ -94,6 +112,7 @@ class MainWeatherViewController: UIViewController {
             }
         }
     }
+    
     func getWeatherByLocation(_ lat: Double, _ long: Double) {
         lastRequestType = .location
         NetworkService.shared.getWeatherByCoordinats(lat, long) { (result) in
@@ -111,6 +130,7 @@ class MainWeatherViewController: UIViewController {
     }
 }
 
+//MARK: - Location Service Delegate
 extension MainWeatherViewController: LocationServiceDelegate {
     func processingLocation(_ lat: Double, _ long: Double) {
         getWeatherByLocation(lat, long)
