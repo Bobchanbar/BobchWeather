@@ -8,6 +8,7 @@
 import Foundation
 
 struct NRootWeatherModel: Codable {
+    var name: String?
     var main: NMainWeatherModel
 
 }
