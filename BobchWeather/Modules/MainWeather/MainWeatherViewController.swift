@@ -37,7 +37,8 @@ class MainWeatherViewController: UIViewController {
     
     //MARK: - Actions
     @objc func openSearchController(){
-        
+        let citiesSearchVC = CitySearchViewController()
+        navigationController?.pushViewController(citiesSearchVC, animated: true)
     }
     
     @objc func getLocation() {
@@ -76,7 +77,7 @@ class MainWeatherViewController: UIViewController {
         locationButton.addTarget(self, action: #selector(getLocation), for: .touchUpInside)
         
         
-        let barSearchButton  = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"),style: .plain, target: self, action: #selector(updateWeather))
+        let barSearchButton  = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"),style: .plain, target: self, action: #selector(openSearchController))
         
         navigationItem.leftBarButtonItem = barSearchButton
         

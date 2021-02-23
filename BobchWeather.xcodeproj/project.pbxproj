@@ -18,6 +18,7 @@
 		8978349525D8057B00E43421 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8978349325D8057B00E43421 /* LaunchScreen.storyboard */; };
 		897834A025D8057C00E43421 /* BobchWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8978349F25D8057C00E43421 /* BobchWeatherTests.swift */; };
 		897834AB25D8057C00E43421 /* BobchWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897834AA25D8057C00E43421 /* BobchWeatherUITests.swift */; };
+		8990AB1525E3ABA40017EB14 /* CitySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8990AB1425E3ABA40017EB14 /* CitySearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		897834A625D8057C00E43421 /* BobchWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BobchWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		897834AA25D8057C00E43421 /* BobchWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BobchWeatherUITests.swift; sourceTree = "<group>"; };
 		897834AC25D8057C00E43421 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8990AB1425E3ABA40017EB14 /* CitySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		8978348725D8057B00E43421 /* BobchWeather */ = {
 			isa = PBXGroup;
 			children = (
+				8990AB1325E3AB560017EB14 /* City Search */,
 				8953DE1325D83197004A47EF /* Entityes */,
 				897834C725D8069500E43421 /* App */,
 				897834C625D8068B00E43421 /* Modules */,
@@ -183,6 +186,14 @@
 				8978348C25D8057B00E43421 /* MainWeatherViewController.swift */,
 			);
 			path = MainWeather;
+			sourceTree = "<group>";
+		};
+		8990AB1325E3AB560017EB14 /* City Search */ = {
+			isa = PBXGroup;
+			children = (
+				8990AB1425E3ABA40017EB14 /* CitySearchViewController.swift */,
+			);
+			path = "City Search";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +332,7 @@
 				8978348B25D8057B00E43421 /* SceneDelegate.swift in Sources */,
 				8953DE1E25D90D52004A47EF /* LocationService.swift in Sources */,
 				8953DE1525D831C1004A47EF /* WeatherModel.swift in Sources */,
+				8990AB1525E3ABA40017EB14 /* CitySearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

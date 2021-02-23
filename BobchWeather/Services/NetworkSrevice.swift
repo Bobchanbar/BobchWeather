@@ -151,8 +151,7 @@ extension NetworkService: CityIDAPI {
     func getCitiesByName(_ name: String, complition: @escaping (Result<[NCityModel], BobchNetworkError>) -> Void) {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
-        urlComponents.host = "192.168.1.73"
-        urlComponents.port = 8181
+        urlComponents.host = "kavars.com"
         urlComponents.queryItems = [
             URLQueryItem(name: "name", value: name)
         ]
