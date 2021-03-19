@@ -7,17 +7,16 @@
 
 import UIKit
 
-enum LastRequestType {
-    case id
-    case location
-}
-
 class MainWeatherViewController: UIViewController {
     
     //MARK: - Properties
     
     var locationService: LocationServiceProtocol?
-    var lastRequestType: LastRequestType?
+    var lastRequestType: WeatherType? {
+        didSet {
+            //
+        }
+    }
     
     //MARK: - UIElements
     
@@ -46,13 +45,20 @@ class MainWeatherViewController: UIViewController {
     }
     
     @objc func updateWeather() {
-        switch lastRequestType {
+        guard let lastRequestType = lastRequestType else {
+            return
+        }
+        switch lastRequestType.type {
         case .id:
-            break
+            guard let idWeatherRequest = lastRequestType as? IdWeather else {
+                return
+            }
+            getWeatherByID(idWeatherRequest.id)
         case .location:
-            break
-        default:
-            break
+            guard let coordWeatherRequest = lastRequestType as? CoordWeather else {
+                return
+            }
+            getWeatherByLocation(coordWeatherRequest.lat, coordWeatherRequest.long)
         }
     }
 
@@ -98,7 +104,7 @@ class MainWeatherViewController: UIViewController {
     }
     
     func getWeatherByID(_ ID: Int) {
-        lastRequestType = .id
+        lastRequestType = IdWeather(type: .id, id: ID)
         
         NetworkService.shared.getWeatherByCityId(ID) { (result) in
             switch result {
@@ -115,7 +121,7 @@ class MainWeatherViewController: UIViewController {
     }
     
     func getWeatherByLocation(_ lat: Double, _ long: Double) {
-        lastRequestType = .location
+        lastRequestType = CoordWeather(type: .location, lat: lat, long: long)
         NetworkService.shared.getWeatherByCoordinats(lat, long) { (result) in
             switch result {
             case .success(let weatherResult):
